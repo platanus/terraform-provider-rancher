@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - 1.6
+
+services:
+  - docker
+
+install:
+  - go get ./...
+
+script: ./bin/cibuild

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+trap "exit" SIGINT SIGTERM
+
+# Check if docker is running
+command -v docker >/dev/null 2>&1 && docker info >/dev/null || {
+  printf >&2 "\e[31mI require docker but it's not installed. Aborting.\e[0m\n";
+exit 1;
+}
+
+# Start Rancher Server
+containerId=$(docker run -d -p :8080 rancher/server)
+
+# Ping Rancher Server until it start listening
+serverPort=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' $containerId)
+serverUrl="http://127.0.0.1:$serverPort/v1"
+echo "=> Rancher server URL: $serverUrl"
+up=""
+sleepTime=5
+while [[ "$up" != "200" && "$up" != "401" ]]; do
+    echo "=> Waiting $sleepTime seconds for rancher server.."
+    sleep $sleepTime
+    up=$(curl -s -o /dev/null -I -w "%{http_code}" $serverUrl)
+    echo "=> Server status: $up"
+done
+
+# Setup environment
+export TF_ACC=1 # Enable acceptance tests
+export CATTLE_URL=$serverUrl
+export CATTLE_ACCESS_KEY=access_key
+export CATTLE_SECRET_KEY=secret_key
+
+# Run tests
+go test -v -tags integration ./...
