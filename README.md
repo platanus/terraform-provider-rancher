@@ -26,3 +26,35 @@ The following arguments are supported:
 * `secret_key` - (Required) Rancher API access key. It must be provided, but it can also be sourced from the `CATTLE_SECRET_KEY` environment variable.
 
 ## Resources
+
+### Environment
+
+Provides a Rancher Environment resource. This can be used to create and manage environments on rancher.
+
+#### Example Usage
+
+```
+# Create a new Rancher environment
+resource "rancher_environment" "default" {
+  name = "staging"
+  description = "The staging environment"
+  orchestration = "cattle"
+}
+```
+
+#### Argument Reference
+
+The following arguments are supported:
+
+* `name` - (Required) The name of the environment.
+* `description` - (Optional) An environment description.
+* `orchestration` - (Optional) Must be one of **cattle**, **swarm**, **mesos** or **kubernetes**. Defaults to **cattle**.
+
+#### Attributes Reference
+
+The following attributes are exported:
+
+* `id` - The ID of the environment.
+* `name` - The name of the environment.
+* `description` - The description of the environment.
+* `orchestration` - The orchestration engine for the environment.
