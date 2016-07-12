@@ -10,12 +10,13 @@ install: make get-deps
 
 script: make bin
 
-after_success: make dist
+before_deploy: make dist
 
 deploy:
   provider: releases
   api_key:
     secure: lOUVQ2VgV8XtbuHtvhvKXvZbgF2nuoIBOEU1V0iFlxpHrB+C90tXzqLihV33pT0K2kIp967QCUrHmjbFjVK+uDC9MbIrlJnmVmg0cO5baFVBnU0l2YPINWa7rghpEVQjTgtdV2mjQpuZxeDwaWQ2RbFVQ3nTBRbMhggIs1gIrZsAzhqC6r1OpP2MP7w+la1b+DfGAkv6I+ajSxuunFuOrzEuOlSqleqSkU0wV7s5W1Ia5xzYwLBcktPKHe5B6ZCP5WwydxXTFyPbOe9eS5Y/9baIsJelCN1SlKGApCxStonADPs8fOH9neA4/z7BR8ycZoUccehm1VAkQT6o1E2JlUrHsA855i+n401zV0VLTJ5EaZ3J11NFp12agG+aV8tPTna7IG3yH1s8kzZbJyt+9RMz3y/US4VCd6PapWzBB1FvL9M/TF4puWgtaMN/CvXYkPohZtQ6sWBLkRr9CICRcyJ/mm706RIfJqC7ILvXMM4A2h/Vin3994+BVnymUl1THyesNQidXpf4l+gZy0IMWV9mYcg0nqFv3xCrnWgQohpAaLV/XVYQxht2v1f0oTD1UrlpJW+PQluRNmaRkBbj3xoTjQ3mtWNmpYHXOrW7hoAtjHvl+IHSce2KNtM91DllatXBN5jzbmJ68v+ZCo+/buM80pQZsSAfvlfZ83/Zfdk=
+  file_glob: true
   file: target/pkg/*.tar.gz
   skip_cleanup: true
   on:
