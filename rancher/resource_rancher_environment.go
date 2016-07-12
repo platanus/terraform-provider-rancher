@@ -131,7 +131,7 @@ func resourceRancherEnvironmentDelete(d *schema.ResourceData, meta interface{}) 
 	log.Printf("[DEBUG] Waiting for environment (%s) to be removed", id)
 
 	stateConf := &resource.StateChangeConf{
-		Pending:    []string{"removed", "removing"},
+		Pending:    []string{"active", "removed", "removing"},
 		Target:     []string{"removed"},
 		Refresh:    EnvironmentStateRefreshFunc(client, id),
 		Timeout:    10 * time.Minute,
