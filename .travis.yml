@@ -10,7 +10,7 @@ install: make get-deps
 
 script: make bin
 
-after_success: make dist
+before_deploy: make dist
 
 deploy:
   provider: releases
