@@ -1,5 +1,3 @@
-TEST = ./rancher
-TESTARGS = -v
 PROJ = terraform-provider-rancher
 
 ARCHS = amd64 386
