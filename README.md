@@ -8,7 +8,7 @@ with the proper credentials before it can be used.
 
 #### Example Usage
 
-```
+```hcl
 # Configure the Rancher provider
 provider "rancher" {
      api_url = "http://rancher.my-domain.com/v1"
@@ -33,7 +33,7 @@ Provides a Rancher Environment resource. This can be used to create and manage e
 
 #### Example Usage
 
-```
+```hcl
 # Create a new Rancher environment
 resource "rancher_environment" "default" {
   name = "staging"
