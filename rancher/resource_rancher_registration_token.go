@@ -100,7 +100,7 @@ func resourceRancherRegistrationTokenRead(d *schema.ResourceData, meta interface
 }
 
 func resourceRancherRegistrationTokenDelete(d *schema.ResourceData, meta interface{}) error {
-	log.Printf("[INFO] Deleting RegistrationToken is not possible, simply removing its ID: %s", d.Id())
+	log.Printf("[INFO] Deleting RegistrationToken: %s", d.Id())
 	id := d.Id()
 	client, err := meta.(*Config).EnvironmentClient(d.Get("environment_id").(string))
 	if err != nil {
