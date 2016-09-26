@@ -72,14 +72,6 @@ resource "rancher_registration_token" "default" {
   description = "Registration token for the staging environment"
   environment_id = "${rancher_environment.default.id}"
 }
-
-output "registration_url" {
-  value = "${rancher_registration_token.registration_url}"
-}
-
-output "registration_token" {
-  value = "${rancher_registration_token.token}"
-}
 ```
 
 #### Argument Reference
