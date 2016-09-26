@@ -47,7 +47,8 @@ func testAccCheckRancherEnvironmentExists(n string, env *rancher.Project) resour
 			return fmt.Errorf("No App Name is set")
 		}
 
-		client := testAccProvider.Meta().(*rancher.RancherClient)
+		rancherServer := testAccProvider.Meta().(*RancherServer)
+		client := rancherServer.GetClient()
 
 		foundEnv, err := client.Project.ById(rs.Primary.ID)
 		if err != nil {
@@ -84,7 +85,8 @@ func testAccCheckRancherEnvironmentAttributes(env *rancher.Project, envName stri
 }
 
 func testAccCheckRancherEnvironmentDestroy(s *terraform.State) error {
-	client := testAccProvider.Meta().(*rancher.RancherClient)
+	rancherServer := testAccProvider.Meta().(*RancherServer)
+	client := rancherServer.GetClient()
 
 	for _, rs := range s.RootModule().Resources {
 		if rs.Type != "rancher_environment" {

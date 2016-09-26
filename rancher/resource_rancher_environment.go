@@ -45,7 +45,8 @@ func resourceRancherEnvironment() *schema.Resource {
 
 func resourceRancherEnvironmentCreate(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Creating Environment: %s", d.Id())
-	client := meta.(*rancher.RancherClient)
+	rancherServer := meta.(*RancherServer)
+	client := rancherServer.GetClient()
 
 	name := d.Get("name").(string)
 	description := d.Get("description").(string)
@@ -71,7 +72,8 @@ func resourceRancherEnvironmentCreate(d *schema.ResourceData, meta interface{}) 
 
 func resourceRancherEnvironmentRead(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Refreshing Environment: %s", d.Id())
-	client := meta.(*rancher.RancherClient)
+	rancherServer := meta.(*RancherServer)
+	client := rancherServer.GetClient()
 
 	env, err := client.Project.ById(d.Id())
 	if err != nil {
@@ -88,7 +90,8 @@ func resourceRancherEnvironmentRead(d *schema.ResourceData, meta interface{}) er
 }
 
 func resourceRancherEnvironmentUpdate(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*rancher.RancherClient)
+	rancherServer := meta.(*RancherServer)
+	client := rancherServer.GetClient()
 
 	name := d.Get("name").(string)
 	description := d.Get("description").(string)
@@ -117,7 +120,8 @@ func resourceRancherEnvironmentUpdate(d *schema.ResourceData, meta interface{}) 
 func resourceRancherEnvironmentDelete(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Deleting Environment: %s", d.Id())
 	id := d.Id()
-	client := meta.(*rancher.RancherClient)
+	rancherServer := meta.(*RancherServer)
+	client := rancherServer.GetClient()
 
 	env, err := client.Project.ById(id)
 	if err != nil {
