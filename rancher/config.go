@@ -1,33 +1,53 @@
 package rancher
 
-import (
-	"log"
+import rancher "github.com/rancher/go-rancher/client"
 
-	rancher "github.com/rancher/go-rancher/client"
-)
-
-type Config struct {
+type RancherServerConfig struct {
 	APIURL    string
 	AccessKey string
 	SecretKey string
 }
 
-// Client returns a new Client for accessing Rancher.
-func (c *Config) Client() (*rancher.RancherClient, error) {
-	if c.APIURL == "" || c.AccessKey == "" || c.SecretKey == "" {
-		return nil, nil
-	}
+//
+type RancherServer struct {
+	config *RancherServerConfig
+}
 
-	client, err := rancher.NewRancherClient(&rancher.ClientOpts{
-		Url:       c.APIURL,
-		AccessKey: c.AccessKey,
-		SecretKey: c.SecretKey,
+// // Client returns a new Client for accessing Rancher.
+// func (r *RancherServer) Server() (*RancherServer, error) {
+// 	if r.config.APIURL == "" || r.config.AccessKey == "" || r.config.SecretKey == "" {
+// 		return nil, nil
+// 	}
+//
+// 	log.Printf("[INFO] Rancher Server configured for url: %s", r.config.APIURL)
+//
+// 	return client, nil
+// }
+
+// GetClient
+func (r *RancherServer) GetClient() *rancher.RancherClient {
+	rancherClient, err := rancher.NewRancherClient(&rancher.ClientOpts{
+		Url:       r.config.APIURL,
+		AccessKey: r.config.AccessKey,
+		SecretKey: r.config.SecretKey,
 	})
 	if err != nil {
-		return nil, err
+		return nil
 	}
 
-	log.Printf("[INFO] Rancher Client configured for url: %s", c.APIURL)
+	return rancherClient
+}
 
-	return client, nil
+// GetEnvironmentClient
+func (r *RancherServer) GetEnvironmentClient(environmentID string) *rancher.RancherClient {
+	rancherClient, err := rancher.NewRancherClient(&rancher.ClientOpts{
+		Url:       r.config.APIURL + "/projects/" + environmentID + "/schemas",
+		AccessKey: r.config.AccessKey,
+		SecretKey: r.config.SecretKey,
+	})
+	if err != nil {
+		return nil
+	}
+
+	return rancherClient
 }
