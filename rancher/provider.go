@@ -31,7 +31,8 @@ func Provider() terraform.ResourceProvider {
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
-			"rancher_environment": resourceRancherEnvironment(),
+			"rancher_environment":        resourceRancherEnvironment(),
+			"rancher_registration_token": resourceRancherRegistrationToken(),
 		},
 
 		ConfigureFunc: providerConfigure,
@@ -51,11 +52,13 @@ func init() {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	config := Config{
+	config := &Config{
 		APIURL:    d.Get("api_url").(string),
 		AccessKey: d.Get("access_key").(string),
 		SecretKey: d.Get("secret_key").(string),
 	}
 
-	return config.Client()
+	err := config.CreateClient()
+
+	return config, err
 }
