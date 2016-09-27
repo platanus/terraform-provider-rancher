@@ -27,6 +27,9 @@ The following arguments are supported:
 
 ## Resources
 
+- [Environment](#environment)
+- [Registration Token](#registration-token)
+
 ### Environment
 
 Provides a Rancher Environment resource. This can be used to create and manage environments on rancher.
