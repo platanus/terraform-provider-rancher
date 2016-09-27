@@ -1,4 +1,4 @@
-# Rancher Terraform Provider
+# Rancher Terraform Provider [![Build Status](https://travis-ci.org/platanus/terraform-provider-rancher.svg?branch=master)](https://travis-ci.org/platanus/terraform-provider-rancher) [![GitHub version](https://badge.fury.io/gh/platanus%2Fterraform-provider-rancher.svg)](https://badge.fury.io/gh/platanus%2Fterraform-provider-rancher)
 
 ## Provider
 
