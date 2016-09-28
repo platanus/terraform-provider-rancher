@@ -30,6 +30,7 @@ The following arguments are supported:
 - [Environment](#environment)
 - [Registration Token](#registration-token)
 - [Registry](#registry)
+- [Stack](#stack)
 
 ### Environment
 
@@ -131,3 +132,58 @@ The following attributes are exported:
 * `description` - (Optional) The registry description.
 * `environment_id` - (Required) The ID of the environment to create the registry for.
 * `server_address` - (Required) The server address for the registry.
+
+### Stack
+
+Provides a Rancher Stack resource. This can be used to create and manage stacks on rancher.
+
+#### Example Usage
+
+```hcl
+# Create a new empty Rancher stack
+resource "rancher_stack" "external-dns" {
+  name = "route53"
+  description = "Route53 stack"
+  environment_id = "${rancher_environment.default.id}"
+  catalog_id = "library:route53:7"
+  scope = "system"
+  environment {
+    AWS_ACCESS_KEY = "MYKEY"
+    AWS_SECRET_KEY = "MYSECRET"
+    AWS_REGION = "eu-central-1"
+    TTL = "60"
+    ROOT_DOMAIN = "example.com"
+    ROUTE53_ZONE_ID = ""
+    HEALTH_CHECK_INTERVAL = "15"
+  }
+}
+```
+
+#### Argument Reference
+
+The following arguments are supported:
+
+* `name` - (Required) The name of the stack.
+* `description` - (Optional) A stack description.
+* `environment_id` - (Required) The ID of the environment to create the stack for.
+* `docker_compose` - (Optional) The `docker-compose.yml` content to apply for the stack.
+* `rancher_compose` - (Optional) The `rancher-compose.yml` content to apply for the stack.
+* `environment` - (Optional) The environment to apply to interpret the docker-compose and rancher-compose files.
+* `catalog_id` - (Optional) The catalog ID to link this stack to. When provided, `docker_compose` and `rancher_compose` will be retrieved from the catalog unless they are overridden.
+* `scope` - (Optional) The scope to attach the stack to. Must be one of **user** or **system**. Defaults to **user**.
+* `start_on_create` - (Optional) Whether to start the stack automatically.
+
+#### Attributes Reference
+
+The following attributes are exported:
+
+* `id` - The ID of the stack.
+* `name` - The name of the stack.
+* `description` - The description of the stack.
+* `environment_id` - (Required) The ID of the environment to create the stack for.
+* `docker_compose` - (Optional) The `docker-compose.yml` content to apply for the stack.
+* `rancher_compose` - (Optional) The `rancher-compose.yml` content to apply for the stack.
+* `environment` - (Optional) The environment to apply to interpret the docker-compose and rancher-compose files.
+* `catalog_id` - (Optional) The catalog ID to link this stack to. When provided, `docker_compose` and `rancher_compose` will be retrieved from the catalog unless they are overridden.
+* `scope` - (Optional) The scope to attach the stack to. Must be one of **user** or **system**. Defaults to **user**.
+* `start_on_create` - (Optional) Whether to start the stack automatically.

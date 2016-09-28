@@ -3,6 +3,7 @@ package rancher
 import (
 	"log"
 
+	"github.com/rancher/go-rancher/catalog"
 	rancher "github.com/rancher/go-rancher/client"
 )
 
@@ -40,8 +41,9 @@ func (c *Config) EnvironmentClient(env string) (*rancher.RancherClient, error) {
 		return nil, nil
 	}
 
+	url := c.APIURL + "/projects/" + env + "/schemas"
 	client, err := rancher.NewRancherClient(&rancher.ClientOpts{
-		Url:       c.APIURL + "/projects/" + env + "/schemas",
+		Url:       url,
 		AccessKey: c.AccessKey,
 		SecretKey: c.SecretKey,
 	})
@@ -49,7 +51,27 @@ func (c *Config) EnvironmentClient(env string) (*rancher.RancherClient, error) {
 		return nil, err
 	}
 
-	log.Printf("[INFO] Rancher Client configured for url: %s", c.APIURL)
+	log.Printf("[INFO] Rancher Client configured for url: %s", url)
+
+	return client, nil
+}
+
+func (c *Config) CatalogClient() (*catalog.RancherClient, error) {
+	if c.APIURL == "" || c.AccessKey == "" || c.SecretKey == "" {
+		return nil, nil
+	}
+
+	url := c.APIURL + "-catalog/schemas"
+	client, err := catalog.NewRancherClient(&catalog.ClientOpts{
+		Url:       url,
+		AccessKey: c.AccessKey,
+		SecretKey: c.SecretKey,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	log.Printf("[INFO] Rancher Catalog Client configured for url: %s", url)
 
 	return client, nil
 }
