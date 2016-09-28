@@ -92,3 +92,38 @@ The following attributes are exported:
 * `environment_id` - The ID of the environment to create the token for.
 * `registration_url` - The URL to use to register new nodes to the environment.
 * `token` - The token to use to register new nodes to the environment.
+
+### Registry
+
+Provides a Rancher Registy resource. This can be used to create registries for rancher environments and retrieve their information.
+
+#### Example Usage
+
+```hcl
+# Create a new Rancher registry
+resource "rancher_registry" "dockerhub" {
+  name = "dockerhub"
+  description = "DockerHub Registry"
+  environment_id = "${rancher_environment.default.id}"
+  server_address = "index.dockerhub.io"
+}
+```
+
+#### Argument Reference
+
+The following arguments are supported:
+
+* `name` - (Required) The name of the registry.
+* `description` - (Optional) A registry description.
+* `environment_id` - (Required) The ID of the environment to create the registry for.
+* `server_address` - (Required) The server address for the registry.
+
+#### Attributes Reference
+
+The following attributes are exported:
+
+* `id` - The ID of the registry.
+* `name` - (Required) The name of the registry.
+* `description` - (Optional) The registry description.
+* `environment_id` - (Required) The ID of the environment to create the registry for.
+* `server_address` - (Required) The server address for the registry.
