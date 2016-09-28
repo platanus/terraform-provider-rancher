@@ -33,6 +33,7 @@ func Provider() terraform.ResourceProvider {
 		ResourcesMap: map[string]*schema.Resource{
 			"rancher_environment":        resourceRancherEnvironment(),
 			"rancher_registration_token": resourceRancherRegistrationToken(),
+			"rancher_registry":           resourceRancherRegistry(),
 		},
 
 		ConfigureFunc: providerConfigure,
