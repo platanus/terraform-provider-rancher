@@ -29,6 +29,7 @@ The following arguments are supported:
 
 - [Environment](#environment)
 - [Registration Token](#registration-token)
+- [Registry](#registry)
 
 ### Environment
 
