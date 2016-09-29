@@ -56,6 +56,15 @@ func (c *Config) EnvironmentClient(env string) (*rancher.RancherClient, error) {
 	return client, nil
 }
 
+func (c *Config) RegistryClient(id string) (*rancher.RancherClient, error) {
+	reg, err := c.Registry.ById(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return c.EnvironmentClient(reg.AccountId)
+}
+
 func (c *Config) CatalogClient() (*catalog.RancherClient, error) {
 	if c.APIURL == "" || c.AccessKey == "" || c.SecretKey == "" {
 		return nil, nil
