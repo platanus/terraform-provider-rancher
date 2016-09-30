@@ -240,7 +240,7 @@ The following attributes are exported:
 
 ## Credits
 
-Thank you [contributors](https://github.com/platanus/send_grid_mailer/graphs/contributors)!
+Thank you [contributors](https://github.com/platanus/terraform-provider-rancher/graphs/contributors)!
 
 <img src="http://platan.us/gravatar_with_text.png" alt="Platanus" width="250"/>
 
