@@ -13,19 +13,19 @@ func Provider() terraform.ResourceProvider {
 			"api_url": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("CATTLE_URL", nil),
+				DefaultFunc: schema.EnvDefaultFunc("RANCHER_URL", nil),
 				Description: descriptions["api_url"],
 			},
 			"access_key": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("CATTLE_ACCESS_KEY", nil),
+				DefaultFunc: schema.EnvDefaultFunc("RANCHER_ACCESS_KEY", nil),
 				Description: descriptions["access_key"],
 			},
 			"secret_key": &schema.Schema{
 				Type:        schema.TypeString,
 				Required:    true,
-				DefaultFunc: schema.EnvDefaultFunc("CATTLE_SECRET_KEY", nil),
+				DefaultFunc: schema.EnvDefaultFunc("RANCHER_SECRET_KEY", nil),
 				Description: descriptions["secret_key"],
 			},
 		},
@@ -56,7 +56,7 @@ func init() {
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	config := &Config{
-		APIURL:    d.Get("api_url").(string),
+		APIURL:    d.Get("api_url").(string) + "/v1",
 		AccessKey: d.Get("access_key").(string),
 		SecretKey: d.Get("secret_key").(string),
 	}
