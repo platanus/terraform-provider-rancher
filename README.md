@@ -229,3 +229,23 @@ The following attributes are exported:
 * `catalog_id` - (Optional) The catalog ID to link this stack to. When provided, `docker_compose` and `rancher_compose` will be retrieved from the catalog unless they are overridden.
 * `scope` - (Optional) The scope to attach the stack to. Must be one of **user** or **system**. Defaults to **user**.
 * `start_on_create` - (Optional) Whether to start the stack automatically.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+## Credits
+
+Thank you [contributors](https://github.com/platanus/send_grid_mailer/graphs/contributors)!
+
+<img src="http://platan.us/gravatar_with_text.png" alt="Platanus" width="250"/>
+
+Terraform Provider for Rancher is maintained by [platanus](http://platan.us).
+
+## License
+
+SendGrid Mailer from 2016 platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.
