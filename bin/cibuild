@@ -12,7 +12,7 @@ containerId=$(docker run -d -p :8080 rancher/server:${RANCHER_VERSION-latest})
 
 # Ping Rancher Server until it start listening
 serverPort=$(docker inspect --format '{{(index (index .NetworkSettings.Ports "8080/tcp") 0).HostPort}}' $containerId)
-serverUrl="http://127.0.0.1:$serverPort/v1"
+serverUrl="http://127.0.0.1:$serverPort"
 echo "=> Rancher server URL: $serverUrl"
 up=""
 sleepTime=5
@@ -25,9 +25,9 @@ done
 
 # Setup environment
 export TF_ACC=1 # Enable acceptance tests
-export CATTLE_URL=$serverUrl
-export CATTLE_ACCESS_KEY=access_key
-export CATTLE_SECRET_KEY=secret_key
+export RANCHER_URL=$serverUrl
+export RANCHER_ACCESS_KEY=access_key
+export RANCHER_SECRET_KEY=secret_key
 
 # Run tests
 go test -v -tags integration ./...

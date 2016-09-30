@@ -11,7 +11,7 @@ with the proper credentials before it can be used.
 ```hcl
 # Configure the Rancher provider
 provider "rancher" {
-     api_url = "http://rancher.my-domain.com/v1"
+     api_url = "http://rancher.my-domain.com:port"
   access_key = "${var.rancher_access_key}"
   secret_key = "${var.rancher_secret_key}"
 }
@@ -21,9 +21,9 @@ provider "rancher" {
 
 The following arguments are supported:
 
-* `api_url` - (Required) Rancher API url. It must be provided, but it can also be sourced from the `CATTLE_URL` environment variable.
-* `access_key` - (Required) Rancher API access key. It must be provided, but it can also be sourced from the `CATTLE_ACCESS_KEY` environment variable.
-* `secret_key` - (Required) Rancher API access key. It must be provided, but it can also be sourced from the `CATTLE_SECRET_KEY` environment variable.
+* `api_url` - (Required) Rancher API url. It must be provided, but it can also be sourced from the `RANCHER_URL` environment variable.
+* `access_key` - (Required) Rancher API access key. It must be provided, but it can also be sourced from the `RANCHER_ACCESS_KEY` environment variable.
+* `secret_key` - (Required) Rancher API access key. It must be provided, but it can also be sourced from the `RANCHER_SECRET_KEY` environment variable.
 
 ## Resources
 
