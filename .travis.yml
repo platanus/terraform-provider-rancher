@@ -6,6 +6,10 @@ go:
 services:
   - docker
 
+env:
+  - RANCHER_VERSION=v1.1.2
+  - RANCHER_VERSION=v1.1.4
+
 install: make get-deps
 
 script: make bin
