@@ -9,6 +9,7 @@ services:
 env:
   - RANCHER_VERSION=v1.1.2
   - RANCHER_VERSION=v1.1.4
+  - RANCHER_VERSION=v1.2.0-pre3
 
 install: make get-deps
 

@@ -3,8 +3,8 @@ package rancher
 import (
 	"log"
 
-	"github.com/rancher/go-rancher/catalog"
 	rancher "github.com/rancher/go-rancher/client"
+	"github.com/raphink/go-rancher/catalog"
 )
 
 type Config struct {
