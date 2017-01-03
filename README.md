@@ -1,5 +1,13 @@
 # Rancher Terraform Provider [![Build Status](https://travis-ci.org/platanus/terraform-provider-rancher.svg?branch=master)](https://travis-ci.org/platanus/terraform-provider-rancher) [![GitHub version](https://badge.fury.io/gh/platanus%2Fterraform-provider-rancher.svg)](https://badge.fury.io/gh/platanus%2Fterraform-provider-rancher)
 
+# DEPRECATION NOTICE
+
+The base code from this plugin was merged into terraform. Please use the built-in rancher functionality from terraform version 0.8.0+.
+
+- https://www.terraform.io/docs/providers/rancher/index.html
+- https://github.com/hashicorp/terraform/blob/master/CHANGELOG.md#080-december-13-2016
+- https://github.com/hashicorp/terraform/pull/9173
+
 ## Provider
 
 The Rancher provider is used to interact with the
